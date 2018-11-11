@@ -27,6 +27,10 @@ library(shiny)
 runGitHub("shiny-tesseract", "jessevent")
 ```
 
+### Accuracy
+
+![](/www/accuracy.png)
+
 ### Usage
 
 The following dependencies are required
