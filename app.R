@@ -53,23 +53,17 @@ ui <- dashboardPage(
                      clip      = FALSE),
                     height = "500px"
                 ),
-                title = "Select area of image")
+                title = "Click & Drag Over Image")
         )),
         fluidRow(column(width = 12,
                 box(width = 12,
-                imageOutput("croppedimage", height = "500px"), title = "Cropped Image")
+                imageOutput("croppedimage", height = "500px"), title = "Area Selected")
         )),
-        fluidRow(column(
-            width = 6, box(
-                width = 12,
-                verbatimTextOutput("image_brushinfo"),
-                title = "Brush Info")
-        ),
-        column(width = 6,
+        fluidRow(column(width = 12,
             box(width = 12,
-                textOutput("ocrtext"),
+                textOutput("ocr_text"),
                 verbatimTextOutput("text_extract"),
-                title = "OCR Text"
+                title = "Text Output"
                 )
         ))
     )
@@ -126,7 +120,7 @@ server <- function(input, output, session) {
   list(src = img, contentType = "image/jpeg")
   })
 
- output$ocrtext <- renderText({
+ output$ocr_text <- renderText({
   req(input$image_brush)
   text   <- image %>% image_resize(input$size) %>%
          image_crop(coords(), repage = FALSE) %>%
